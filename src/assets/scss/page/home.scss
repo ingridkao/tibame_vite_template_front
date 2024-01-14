@@ -1,0 +1,30 @@
+//function
+
+.home{
+    .image{
+        width: 16rem;
+        margin: auto;
+        >div{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        &_box{
+            height: 15rem;
+            padding: 0.5rem 0;
+            img{
+                height: 100%;
+            }
+        }
+        &_thumbnail{
+            img{
+                width: 4rem;
+            }
+            button{
+                width: 2rem;
+                background-color: transparent;
+            }
+        }
+    }
+}
+

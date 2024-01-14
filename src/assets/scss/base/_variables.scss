@@ -1,0 +1,59 @@
+//base
+// @import "_reset";
+// @import "_color";
+
+:root {
+    --vt-c-white: $white;
+    --vt-c-white-soft: $white-soft;
+    --vt-c-white-mute: $white-mute;
+
+    --vt-c-black: $black;
+    --vt-c-black-soft: $black-soft;
+    --vt-c-black-mute: $black-mute;
+
+    --vt-c-indigo: $indigo;
+
+    --vt-c-divider-light-1: $divider-light-1;
+    --vt-c-divider-light-2: $divider-light-2;
+    --vt-c-divider-dark-1: $divider-dark-1;
+    --vt-c-divider-dark-2: $divider-dark-2;
+
+    --vt-c-text-light-1: $indigo;
+    --vt-c-text-light-2: $divider-dark-1;
+    --vt-c-text-dark-1: $white;
+    --vt-c-text-dark-2: $white-opa;
+}
+
+/* semantic color variables for this project */
+:root {
+    --color-background: var(--vt-c-white);
+    --color-background-soft: var(--vt-c-white-soft);
+    --color-background-mute: var(--vt-c-white-mute);
+
+    --color-border: var(--vt-c-divider-light-2);
+    --color-border-hover: var(--vt-c-divider-light-1);
+
+    --color-heading: var(--vt-c-text-light-1);
+    --color-text: var(--vt-c-text-light-1);
+
+    --section-gap: 160px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: var(--vt-c-black);
+        --color-background-soft: var(--vt-c-black-soft);
+        --color-background-mute: var(--vt-c-black-mute);
+
+        --color-border: var(--vt-c-divider-dark-2);
+        --color-border-hover: var(--vt-c-divider-dark-1);
+
+        --color-heading: var(--vt-c-text-dark-1);
+        --color-text: var(--vt-c-text-dark-2);
+    }
+}
+
+body {
+    color: var(--color-text);
+    background: var(--color-background);
+}
