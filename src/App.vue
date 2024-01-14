@@ -3,21 +3,41 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
+<script>
+const imgUrl = new URL('../src/assets/images/home/images.jpeg', import.meta.url).href
+export default {
+  data() {
+    return {
+      rawHtml: '<p>1</p>',
+      imgUrl: imgUrl
+    }
+  },
+  mounted() {
+  }
+}
+</script>
+
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
+    <!-- <img src="@/assets/images/home/images.jpeg" alt=""> -->
+    <img :src="imgUrl" alt="">
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/product">Product</RouterLink>
+        <RouterLink to="/login">Login</RouterLink>
       </nav>
     </div>
   </header>
 
   <RouterView />
+
+  <footer>
+    @tibame czsdasdcszcsacsc
+  </footer>
 </template>
 
 <style scoped>
