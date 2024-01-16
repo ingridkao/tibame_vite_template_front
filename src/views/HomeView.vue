@@ -85,13 +85,13 @@ export default {
       </div>
       <!-- {{ imgnum }} -->
       <div class="image_thumbnail">
-        <button @click="minuxImage"> 👈</button>
+        <button class="shadow" @click="minuxImage"> 👈</button>
         <img v-for="num in 3" 
           :src="getImageUrl(`product/${num}.jpeg`)"
           :width="100"
           @click="imgnum = num"
         />
-        <button @click="addImage"> 👉 </button>
+        <button class="shadow" @click="addImage"> 👉 </button>
       </div>
     </div>
   </div>
