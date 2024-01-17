@@ -1,3 +1,40 @@
+<template>
+  <div class="product">
+    <h3> 產品 </h3>
+    <div>
+      <!-- <input type="text" v-model.trim="search" @input="filterHandle"> -->
+      <input type="text" v-model.trim="search">
+      <input type="text" v-model.trim="category">
+      <!-- {{ search }} -->
+      {{ dataCount }}
+      <!-- {{ displayData.length }} -->
+    </div>
+
+    <div v-if="loading">loading...</div>
+    <div v-else-if="nodata">nodata...</div>
+    <div v-else class="product_container">
+      <div 
+        v-for="item in displayData" 
+        :key="item.id"
+        class="product_card"
+      >
+        <div class="product_card_img">
+          <img :src="item.image" :alt="item.title">
+        </div>
+        <h6>{{ item.title  }}</h6>
+        <div>
+          <p>{{ item.category  }}</p>
+          <p>$ {{ item.price  }}</p>
+        </div>
+        <div v-if="item.rating">
+          {{ item.rating.rate }}
+          ({{ item.rating.count }})
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
 // 引入axios函式庫
 import axios from 'axios';
@@ -6,6 +43,7 @@ export default {
   data() {
     return {
       search: '',
+      category: '',
       responseData: [],
       displayData: []
     }
@@ -13,6 +51,32 @@ export default {
   created() {
     // this.fetchData()
     this.axiosGetData()
+  },
+  computed: {
+    dataCount(){
+      return this.displayData.length
+    },
+    loading(){
+      return this.responseData.length === 0
+    },
+    nodata(){
+      return this.displayData.length === 0
+    }
+  },
+  watch: {
+    // 每当 search 改变时，这个函数就会执行
+    search(newSearch, oldsearch) {
+      console.log('new:' +newSearch);
+      console.log('old:'+oldsearch);
+      this.filterHandle()
+    },
+    category: {
+      handler(newcCategory) {
+        console.log(newcCategory);
+      },
+      // 在组件实例创建时，强制立即执行回调，預設false
+      immediate: true
+    }
   },
   methods: {
     fetchData() {
@@ -43,24 +107,6 @@ export default {
 }
 
 </script>
-
-<template>
-
-  <div class="product">
-    <h3> 產品 </h3>
-    <div>
-      <input type="text" v-model.trim="search" @input="filterHandle">
-      <!-- {{ search }} -->
-      {{ displayData.length }}
-    </div>
-
-    <div class="product_container">
-      <!-- 請把以下資料排版 -->
-      {{ displayData }}
-    </div>
-
-  </div>
-</template>
 
 <style lang="scss">
 // 需要先下npm install -D sass
