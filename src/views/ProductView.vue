@@ -8,6 +8,8 @@
       <!-- {{ search }} -->
       {{ dataCount }}
       <!-- {{ displayData.length }} -->
+      <Button @click="drawerOpen = true">購物車</Button>
+
     </div>
 
     <div v-if="loading">loading...</div>
@@ -17,22 +19,42 @@
         v-for="item in displayData" 
         :key="item.id"
         class="product_card"
-        @click="goToProduct(item)"
       >
-        <div class="product_card_img">
-          <img :src="item.image" :alt="item.title">
+        <div @click="goToProduct(item)">
+          <div class="product_card_img">
+            <img :src="item.image" :alt="item.title">
+          </div>
+          <h6>{{ item.title  }}</h6>
+          <div>
+            <p>{{ item.category  }}</p>
+            <p>$ {{ item.price  }}</p>
+          </div>
+          <div v-if="item.rating">
+            {{ item.rating.rate }}
+            ({{ item.rating.count }})
+          </div>
         </div>
-        <h6>{{ item.title  }}</h6>
-        <div>
-          <p>{{ item.category  }}</p>
-          <p>$ {{ item.price  }}</p>
-        </div>
-        <div v-if="item.rating">
-          {{ item.rating.rate }}
-          ({{ item.rating.count }})
-        </div>
+        <Button @click="addToCart(item, 1)">加入購物車</Button>
       </div>
     </div>
+
+
+    <Drawer :closable="false" v-model="drawerOpen">
+        <header>
+          <h6>購物車</h6>
+          <Button shape="circle" @click="drawerOpen = false" type="primary">Close</Button>
+        </header>
+        <!-- {{ cart }} -->
+        <div v-for="item in cart" :key="item.id">
+          {{ item.title }}
+          <br>
+          <!-- {{ item.price }} -->
+          <Button shape="circle" @click="reduceFromCart(item)">-</Button>
+          {{ item.count }}
+          <Button shape="circle" @click="addToCart(item)">+</Button>
+          <Button @click="removeFromCart(item)">移除</Button>
+        </div>
+    </Drawer>
   </div>
 </template>
 
@@ -46,7 +68,9 @@ export default {
       search: '',
       category: '',
       responseData: [],
-      displayData: []
+      displayData: [],
+      drawerOpen:false,
+      cart: [],
     }
   },
   created() {
@@ -111,6 +135,38 @@ export default {
           id: product.id
         }
       })
+    },
+    addToCart(product) {
+      const addedIndex = this.cart.findIndex(item => item.id === product.id)
+      if(addedIndex >=0){
+        this.cart[addedIndex] = {
+          ...this.cart[addedIndex],
+          count: this.cart[addedIndex]['count'] + 1
+        }
+      }else{
+        this.cart.push({
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          count: 1
+        })
+      }
+    },
+    reduceFromCart(product){
+      const productIndex = this.cart.findIndex(item => item.id === product.id)
+      if(this.cart[productIndex] && this.cart[productIndex]['count'] > 1){
+        this.cart[productIndex] = {
+          ...this.cart[productIndex],
+          count: this.cart[productIndex]['count'] - 1
+        }
+      }else{
+        this.cart.splice(productIndex, 1)
+      }
+    },
+    removeFromCart(product){
+      const productIndex = this.cart.findIndex(item => item.id === product.id)
+      this.cart.splice(productIndex, 1)
+
     }
   }
 }
