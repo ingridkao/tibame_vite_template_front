@@ -1,6 +1,8 @@
+@import '../base/color';
+
 .product{
     input{
-        color: rgb(40, 168, 40);
+        color: $mgreen;
     }
     &_container{
         width: 100%;
