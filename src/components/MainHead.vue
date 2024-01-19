@@ -18,7 +18,8 @@
                         <MenuItem name="2-3">哈哈</MenuItem>
                     </Submenu>
                     <MenuItem name="3">
-                        <RouterLink to="/login">login</RouterLink>
+                        <Button v-if="user" @click="logout">logout</Button>
+                        <RouterLink v-else to="/login">login</RouterLink>
                     </MenuItem>
                 </Menu>
             </div>
@@ -46,7 +47,9 @@
                         <MenuItem name="3-3">哈哈</MenuItem>
                     </Submenu>
                     <MenuItem name="4">
-                        <RouterLink to="/login">login</RouterLink>
+                        <!-- {{ user? 1: 0 }} -->
+                        <Button v-if="user" @click="logout">logout</Button>
+                        <RouterLink v-else to="/login">login</RouterLink>
                     </MenuItem>
                 </Menu>
             </Drawer>
@@ -58,6 +61,11 @@
 <script>
 // import { RouterLink } from 'vue-router'
 import { Menu, MenuItem, Submenu} from 'view-ui-plus'
+
+// https://pinia.vuejs.org/core-concepts/getters.html#Without-setup-
+import { mapState, mapActions } from 'pinia'
+import userStore from '@/stores/auth'
+
 export default {
     components: {
         // RouterLink: RouterLink,
@@ -70,7 +78,21 @@ export default {
             menuTarget: 0,
             drawerOpen: false
         }
-    }
+    },
+    computed: {
+        // 這裡帶入兩個參數 : 一個是Store，另一個是要帶入的state,getters
+        ...mapState(userStore, ['name']),
+        user(){
+            return this.checkLogin()
+        }
+    },
+    methods: {
+        // 這裡帶入兩個參數 : 一個是Store，另一個是要帶入的actions
+        ...mapActions(userStore, ['updateToken', 'updateName', 'checkLogin']),
+        logout(){
+            this.updateToken('')
+        }
+    },
 };
 </script>
 
