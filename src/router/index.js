@@ -18,15 +18,38 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/product',
+      path: '/product/:id',
       name: 'product',
       component: () => import('../views/ProductView.vue')
+    },
+    {
+      path: '/activity',
+      name: 'activity',
+      component: () => import('../views/activity/ActivityIndex.vue'),
+      children: [
+        { 
+          path: '', 
+          name: 'activity-list', 
+          component: () => import('../views/activity/ActivityListIndex.vue')  
+        },
+        { 
+          path: ':id', 
+          name: 'activity-info', 
+          component: () => import('../views/activity/ActivityInfoIndex.vue')  
+        }
+      ],
     },
     {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue')
     },
+    // 404頁面：沒有被配置的路由都會去NotFound
+    { 
+      path: '/:pathMatch(.*)*', 
+      name: 'NotFound', 
+      component: () => import('../views/NotFoundView.vue')
+    }
   ]
 })
 

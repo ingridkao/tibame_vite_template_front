@@ -2,22 +2,36 @@
   <MainHead/>
 
   <!-- 頁面路由route渲染的地方 -->
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 
-  <footer>
-    ....
-   
-  </footer>
+  <MainFooter 
+    :content1="money"
+    @callParentPay="payMoney"
+  />
 </template>
 
 <script>
 import { RouterView } from 'vue-router'
 import MainHead from '@/components/MainHead.vue'
+import MainFooter from '@/components/MainFooter.vue'
 
 export default {
   components: {
     MainHead,
-    RouterView
+    RouterView,
+    MainFooter
+  },
+  data() {
+    return {
+      money: 100
+    }
+  },
+  methods: {
+    payMoney(amount){
+      this.money += amount
+    }
   }
 };
 </script>

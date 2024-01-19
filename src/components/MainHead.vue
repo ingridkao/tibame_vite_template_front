@@ -56,14 +56,14 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
+// import { RouterLink } from 'vue-router'
 import { Menu, MenuItem, Submenu} from 'view-ui-plus'
 export default {
     components: {
-        RouterLink: RouterLink,
+        // RouterLink: RouterLink,
         Menu: Menu,
-        MenuItem: MenuItem,
-        Submenu: Submenu
+        MenuItem,
+        Submenu
     },
     data() {
         return {
