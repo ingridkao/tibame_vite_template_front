@@ -1,5 +1,5 @@
 <template>
-    <header>活動</header>
+    <header>活動頁面的共用header</header>
     <router-view></router-view>
 </template>
 

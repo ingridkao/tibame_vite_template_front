@@ -17,6 +17,7 @@
         v-for="item in displayData" 
         :key="item.id"
         class="product_card"
+        @click="goToProduct(item)"
       >
         <div class="product_card_img">
           <img :src="item.image" :alt="item.title">
@@ -101,6 +102,14 @@ export default {
       this.displayData = this.responseData.filter((item)=>{
         // console.log(item);
         return item.title.includes(this.search)
+      })
+    },
+    goToProduct(product){
+      this.$router.push({
+        name: 'productDetail',
+        params: {
+          id: product.id
+        }
       })
     }
   }
