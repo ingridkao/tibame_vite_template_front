@@ -1,20 +1,34 @@
+@use "sass:math";
+
 @mixin shadowlb($color: $mgreen) {
-    border: 3px solid $color;
-    box-shadow: -8px 8px 0px $color;
+  border: 3px solid $color;
+  box-shadow: -8px 8px 0px $color;
+}
+
+@mixin shadowrb($color: $mgreen) {
+  border: 3px solid $color;
+  box-shadow: 8px 8px 0px $color;
 }
 
 //在這邊如果有計算需要加calc
 @mixin grid($col, $b: null) {
-    @for $i from 1 through $col {
-        @if $b==null {
-            .col-#{$i} {
-                width: calc($i / $col) * 100%;
-            }
-        }
-        @else {
-            .col-#{$b}-#{$i} {
-                width: calc($i / $col) * 100%;
-            }
-        }
+  @for $i from 1 through $col {
+    @if $b==null {
+      .col-#{$i} {
+        // warning: 不建議的寫法
+        // width: ($i / $col) * 100%;
+
+        // 1. 用 css 寫法, 但會在瀏覽器端才計算
+        // width: calc(#{$i} / #{$col} * 100%);
+
+        // 2. 建議寫法, 保持純Sass語法並在編譯時就完成計算
+        width: math.div($i, $col) * 100%;
+      }
+    } @else {
+      .col-#{$b}-#{$i} {
+        // width: ($i / $col) * 100%;
+        width: math.div($i, $col) * 100%;
+      }
     }
+  }
 }

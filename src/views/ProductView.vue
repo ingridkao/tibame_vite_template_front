@@ -1,10 +1,10 @@
 <template>
   <main class="product">
-    <h3> 產品 </h3>
+    <h3>產品</h3>
     <div>
       <!-- <input type="text" v-model.trim="search" @input="filterHandle"> -->
       <!-- <input type="text" v-model.trim="search"> -->
-      <Input v-model.trim="search" placeholder="Enter something..."/>
+      <Input v-model.trim="search" placeholder="Enter something..." />
     </div>
 
     <div>
@@ -14,73 +14,65 @@
     <div v-if="loading">loading...</div>
     <div v-else-if="nodata">nodata...</div>
     <div v-else class="product_container">
-      <template 
-        v-for="item in displayData" 
-        :key="item.id"
-      >
-        <ProductCard 
-          v-if="item"
-          :product="item"
-          @addCard="addCart"
-        />
+      <template v-for="item in displayData" :key="item.id">
+        <ProductCard v-if="item" :product="item" @addCard="addCart" />
       </template>
     </div>
 
     <Drawer title="購物車" :closable="false" v-model="drawerOpen">
-        <Button shape="circle" @click="drawerOpen = false" type="primary">Close</Button>
-        <div v-for="item in cartData" :key="item.id">
-          <p>{{ item.title }} </p>
-          <p>
-            <Button shape="circle">-</Button>
-            {{ item.count }}
-            <Button shape="circle" @click="addCart(item)">+</Button>
-          </p>
-        </div>
+      <Button shape="circle" @click="drawerOpen = false" type="primary"
+        >Close</Button
+      >
+      <div v-for="item in cartData" :key="item.id">
+        <p>{{ item.title }}</p>
+        <p>
+          <Button shape="circle">-</Button>
+          {{ item.count }}
+          <Button shape="circle" @click="addCart(item)">+</Button>
+        </p>
+      </div>
     </Drawer>
   </main>
 </template>
 <script>
 // 引入axios函式庫
-import axios from 'axios'
+import axios from "axios";
 // 引入組件
-import ProductCard from '@/components/ProductCard.vue'
+import ProductCard from "@/components/ProductCard.vue";
 // 引入stores
-import { mapState, mapActions } from 'pinia'
-import cartStore from '@/stores/cart'
+import { mapState, mapActions } from "pinia";
+import cartStore from "@/stores/cart";
 
 export default {
-  components:{
-    ProductCard
+  components: {
+    ProductCard,
   },
   data() {
     return {
-      search: '',
+      search: "",
       responseData: [],
       displayData: [],
-      drawerOpen: false
-    }
+      drawerOpen: false,
+    };
   },
   created() {
-    this.axiosGetData()
+    this.axiosGetData();
   },
   computed: {
     //使用 mapState 輔助函數將/src/stores/cart裡的state/data 映射在這裡
     // !!!要寫在computed
-    ...mapState(cartStore, ['cartData']),
-    loading(){
-      return this.responseData.length === 0
+    ...mapState(cartStore, ["cartData"]),
+    loading() {
+      return this.responseData.length === 0;
     },
-    nodata(){
-      return this.displayData.length === 0
-    }
   },
   watch: {
-    search(newVal, oldVal){
+    search(newVal, oldVal) {
       // console.log(this.search);
       // console.log('new:'+newVal);
       // console.log('old:'+oldVal);
       // 可以調用下面的methods
-      this.filterHandle()
+      this.filterHandle();
     },
     responseData: {
       handler(newcData) {
@@ -89,34 +81,32 @@ export default {
       // 如果畫面一開始就要監聽要設成true
       // immediate: true,
       // 如果是要監聽陣列或物件要設成true
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     //使用 mapActions 輔助函數將/src/stores/cart裡的methods 映射在這裡
-    ...mapActions(cartStore, ['addCartData']),
+    ...mapActions(cartStore, ["addCartData"]),
     axiosGetData() {
-      axios.get('https://fakestoreapi.com/products')
-        .then(res => {
-          if (res && res.data) {
-            this.responseData = res.data
-            this.displayData = res.data
-          }
-        })
+      axios.get("https://fakestoreapi.com/products").then((res) => {
+        if (res && res.data) {
+          this.responseData = res.data;
+          this.displayData = res.data;
+        }
+      });
     },
     filterHandle() {
-      this.displayData = this.responseData.filter((item)=>{
+      this.displayData = this.responseData.filter((item) => {
         // 需要確認資料來源的key是什麼
         // console.log(item);
-        return item.title.includes(this.search)
-      })
+        return item.title.includes(this.search);
+      });
     },
-    addCart(product){
-      this.addCartData(product)
-    }
-  }
-}
-
+    addCart(product) {
+      this.addCartData(product);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
