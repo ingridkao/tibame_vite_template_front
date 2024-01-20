@@ -6,3 +6,15 @@
     max-width: 300px;
     background-color: var(--color-background);
 }
+
+.ivu-drawer{
+    &-content{
+        background-color: var(--color-background);
+    }
+    &-header{
+        border-color: var(--color-border);
+        &-inner{
+            color: var(--color-text);
+        }
+    }
+}

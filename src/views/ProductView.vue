@@ -8,14 +8,7 @@
     </div>
 
     <div>
-      <!-- 暫時可以先寫在這邊 -->
-      <h6>購物車</h6>
-      <ul>
-        <li v-for="item in cartData">
-          <p>{{ item.title }} </p>
-          <p>{{ item.count }} </p>
-        </li>
-      </ul>
+      <Button @click="drawerOpen = true">購物車</Button>
     </div>
 
     <div v-if="loading">loading...</div>
@@ -32,13 +25,29 @@
         />
       </template>
     </div>
+
+    <Drawer title="購物車" :closable="false" v-model="drawerOpen">
+        <Button shape="circle" @click="drawerOpen = false" type="primary">Close</Button>
+        <div v-for="item in cartData" :key="item.id">
+          <p>{{ item.title }} </p>
+          <p>
+            <Button shape="circle">-</Button>
+            {{ item.count }}
+            <Button shape="circle" @click="addCart(item)">+</Button>
+          </p>
+        </div>
+    </Drawer>
   </main>
 </template>
 <script>
 // 引入axios函式庫
 import axios from 'axios'
-
+// 引入組件
 import ProductCard from '@/components/ProductCard.vue'
+// 引入stores
+import { mapState, mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
+
 export default {
   components:{
     ProductCard
@@ -48,14 +57,16 @@ export default {
       search: '',
       responseData: [],
       displayData: [],
-      cartData: []
+      drawerOpen: false
     }
   },
   created() {
-    // this.fetchData()
     this.axiosGetData()
   },
   computed: {
+    //使用 mapState 輔助函數將/src/stores/cart裡的state/data 映射在這裡
+    // !!!要寫在computed
+    ...mapState(cartStore, ['cartData']),
     loading(){
       return this.responseData.length === 0
     },
@@ -82,16 +93,9 @@ export default {
     }
   },
   methods: {
-    // fetchData() {
-    //   //使用fetch
-    //   fetch('https://fakestoreapi.com/products')
-    //     .then(res => res.json())
-    //     .then(json => {
-    //       this.responseData = json
-    //     })
-    // },
+    //使用 mapActions 輔助函數將/src/stores/cart裡的methods 映射在這裡
+    ...mapActions(cartStore, ['addCartData']),
     axiosGetData() {
-      //使用axios
       axios.get('https://fakestoreapi.com/products')
         .then(res => {
           if (res && res.data) {
@@ -102,38 +106,13 @@ export default {
     },
     filterHandle() {
       this.displayData = this.responseData.filter((item)=>{
+        // 需要確認資料來源的key是什麼
         // console.log(item);
         return item.title.includes(this.search)
       })
     },
     addCart(product){
-      // console.log(product);
-      // this.cartData.push({
-      //   ...product,
-      //   count: 1
-      // })
-      const resultIndex = this.cartData.findIndex((item)=>{
-        return item.id === product.id
-      })
-      if(resultIndex < 0){
-        // 購物車裡面沒有這筆資料，要把資料丟進去
-        this.cartData.push({
-          id:product.id,
-          title:product.title,
-          price:product.price,
-          count: 1
-        })
-      }else{
-        // 購物車裡面有這筆資料，要把count+1
-        const oldCount = this.cartData[resultIndex]['count']
-        this.cartData[resultIndex] = {
-          ...this.cartData[resultIndex],
-          count: oldCount + 1
-        }
-        // 下一行是錯誤寫法
-        // this.cartData[resultIndex]['count'] += 1
-      }
-      // console.log(this.cartData);
+      this.addCartData(product)
     }
   }
 }
