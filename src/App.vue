@@ -7,18 +7,19 @@
   </main>
 
   <MainFooter />
-</template>å
+</template>
+å
 
 <script>
-import { RouterView } from 'vue-router'
-import MainHead from '@/components/MainHead.vue'
-import MainFooter from '@/components/MainFooter.vue'
+import { RouterView } from "vue-router";
+import MainHead from "@/components/MainHead.vue";
+import MainFooter from "@/components/MainFooter.vue";
 //import AOS
 export default {
   components: {
     MainHead,
     RouterView,
-    MainFooter
+    MainFooter,
   },
   mounted() {
     //AOS.init();
@@ -27,8 +28,10 @@ export default {
 </script>
 
 <style scoped>
-main{
+main {
   height: calc(100vh - 7rem);
   height: calc(100dvh - 7rem);
+  overflow: scroll;
+  overflow-x: hidden;
 }
 </style>
