@@ -1,4 +1,6 @@
 <script>
+import { getImageUrl } from '@/assets/js/common'
+
 // 路徑需要確認
 const imgUrl1 = new URL('../assets/images/home/fern.jpeg', import.meta.url).href
 export default {
@@ -16,7 +18,8 @@ export default {
     getImageUrl(paths){
       // 路徑需要確認
       // return new URL('./assets/images/' + paths, import.meta.url).href
-      return new URL(`../assets/images/${paths}`, import.meta.url).href
+      // return new URL(`../assets/images/${paths}`, import.meta.url).href
+      return getImageUrl(paths)
     },
     addImage(){
       // 1231231231...

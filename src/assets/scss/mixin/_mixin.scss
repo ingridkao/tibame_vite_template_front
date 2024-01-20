@@ -3,16 +3,17 @@
     box-shadow: -8px 8px 0px $color;
 }
 
+//在這邊如果有計算需要加calc
 @mixin grid($col, $b: null) {
     @for $i from 1 through $col {
         @if $b==null {
             .col-#{$i} {
-                width: ($i / $col) * 100%;
+                width: calc($i / $col) * 100%;
             }
         }
         @else {
             .col-#{$b}-#{$i} {
-                width: ($i / $col) * 100%;
+                width: calc($i / $col) * 100%;
             }
         }
     }

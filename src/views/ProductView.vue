@@ -21,38 +21,28 @@
     <div v-if="loading">loading...</div>
     <div v-else-if="nodata">nodata...</div>
     <div v-else class="product_container">
-      <div 
+      <template 
         v-for="item in displayData" 
         :key="item.id"
-        class="product_card"
       >
-        <router-link :to="{
-            name: 'productInfo',
-            params: {id: item.id}
-        }">
-          <div class="product_card_img">
-            <img :src="item.image" :alt="item.title">
-          </div>
-          <h6>{{ item.title  }}</h6>
-          <div>
-            <p>{{ item.category  }}</p>
-            <p>$ {{ item.price  }}</p>
-          </div>
-          <div v-if="item.rating">
-            {{ item.rating.rate }}
-            ({{ item.rating.count }})
-          </div>
-        </router-link>
-
-        <Button @click="addCart(item)">加入購物車</Button>
-      </div>
+        <ProductCard 
+          v-if="item"
+          :product="item"
+          @addCard="addCart"
+        />
+      </template>
     </div>
   </main>
 </template>
 <script>
 // 引入axios函式庫
-import axios from 'axios';
+import axios from 'axios'
+
+import ProductCard from '@/components/ProductCard.vue'
 export default {
+  components:{
+    ProductCard
+  },
   data() {
     return {
       search: '',
