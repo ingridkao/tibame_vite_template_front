@@ -2,3 +2,18 @@
     border: 3px solid $color;
     box-shadow: -8px 8px 0px $color;
 }
+
+@mixin grid($col, $b: null) {
+    @for $i from 1 through $col {
+        @if $b==null {
+            .col-#{$i} {
+                width: ($i / $col) * 100%;
+            }
+        }
+        @else {
+            .col-#{$b}-#{$i} {
+                width: ($i / $col) * 100%;
+            }
+        }
+    }
+}

@@ -46,18 +46,20 @@
                         <MenuItem name="3-3">哈哈</MenuItem>
                     </Submenu>
                     <MenuItem name="4">
-                        <RouterLink to="/login">login</RouterLink>
+                        <Button v-if="token" @click="logout">登出</Button>
+                        <RouterLink v-else to="/login">login</RouterLink>
                     </MenuItem>
                 </Menu>
             </Drawer>
         </div>
     </header>
-
 </template>
 
 <script>
 import { RouterLink } from 'vue-router'
 import { Menu, MenuItem, Submenu} from 'view-ui-plus'
+import { mapState, mapActions } from 'pinia'
+import userStore from '@/stores/user'
 export default {
     components: {
         RouterLink: RouterLink,
@@ -69,6 +71,19 @@ export default {
         return {
             menuTarget: 0,
             drawerOpen: false
+        }
+    },
+    computed: {
+        //使用 mapState 輔助函數將/src/stores/user裡的state/data 映射在這裡
+        // !!!要寫在computed
+        ...mapState(userStore, ['token'])
+    },
+    methods:{
+        //使用 mapActions 輔助函數將/src/stores/user裡的actions/methods 映射在這裡
+        ...mapActions(userStore, ['updateToken']),
+        logout(){
+            // 調用pinia的updateToken
+            this.updateToken('')
         }
     }
 };

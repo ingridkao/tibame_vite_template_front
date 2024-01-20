@@ -3,7 +3,8 @@ import { createPinia } from 'pinia'
 
 import { 
     Button, Table, Drawer,
-    Carousel, CarouselItem 
+    Carousel, CarouselItem,
+    Input
 } from 'view-ui-plus'
 import 'view-ui-plus/dist/styles/viewuiplus.css'
 import './assets/scss/main.scss';
@@ -22,6 +23,7 @@ vueApp.component('Table', Table)
 vueApp.component('Drawer', Drawer)
 vueApp.component('Carousel', Carousel)
 vueApp.component('CarouselItem', CarouselItem)
+vueApp.component('Input', Input)
 
 // 渲染在index.html裡面的div#app
 vueApp.mount('#app')

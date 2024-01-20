@@ -1,26 +1,28 @@
 <template>
-  <MainHead/>
+  <MainHead />
 
   <!-- 頁面路由route渲染的地方 -->
   <RouterView />
 
-  <footer>
-    ....
-   
-  </footer>
-</template>
+  <MainFooter />
+</template>å
 
 <script>
 import { RouterView } from 'vue-router'
 import MainHead from '@/components/MainHead.vue'
-
+import MainFooter from '@/components/MainFooter.vue'
+//import AOS
 export default {
   components: {
     MainHead,
-    RouterView
-  }
+    RouterView,
+    MainFooter
+  },
+  mounted() {
+    //AOS.init();
+  },
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 </style>
