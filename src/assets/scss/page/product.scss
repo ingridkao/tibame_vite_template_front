@@ -17,8 +17,14 @@
     border: 1px dotted var(--color-border);
     flex-basis: 25%;
     padding: 1rem;
+    &:hover {
+      background: hsla(160, 100%, 37%, 0.2);
+    }
     a {
       flex-grow: 1;
+      &:hover {
+        background: transparent;
+      }
     }
     &_img {
       display: flex;
