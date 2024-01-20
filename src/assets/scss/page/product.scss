@@ -1,29 +1,35 @@
-@import '@/assets/scss/main';
-.product{
-    input{
-        color: var(--color-text);
+@import "@/assets/scss/main";
+.product {
+  input {
+    color: var(--color-text);
+  }
+  &_container {
+    width: 100%;
+    padding: 1rem;
+    font-size: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px dotted var(--color-border);
+    flex-basis: 25%;
+    padding: 1rem;
+    a {
+      flex-grow: 1;
     }
-    &_container{
+    &_img {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 10rem;
+      img {
+        object-fit: contain;
         width: 100%;
-        padding: 1rem;
-        font-size: 0.8rem;
-        display: flex;
-        flex-wrap: wrap;
+        height: 100%;
+      }
     }
-    &_card{
-        border: 1px dotted var(--color-border);
-        flex-basis: 25%;
-        padding: 1rem;
-        &_img{
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            height: 10rem;
-            img{
-                object-fit: contain;
-                width: 100%;
-                height: 100%;
-            }
-        }
-    }
+  }
 }
