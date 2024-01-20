@@ -2,7 +2,9 @@
   <MainHead />
 
   <!-- 頁面路由route渲染的地方 -->
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 
   <MainFooter />
 </template>å
@@ -24,5 +26,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped>
+main{
+  height: calc(100vh - 7rem);
+  height: calc(100dvh - 7rem);
+}
 </style>
