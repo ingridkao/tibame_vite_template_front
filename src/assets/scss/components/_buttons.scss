@@ -1,3 +1,9 @@
-button.shadow{
-    @include shadowlb($color: $mblue)
+button.shadow {
+  @include shadowlb($color: $mblue);
+}
+button.shadow-left {
+  @include shadowlb($color: $mblue);
+}
+button.shadow-right {
+  @include shadowrb($color: $mblue);
 }
