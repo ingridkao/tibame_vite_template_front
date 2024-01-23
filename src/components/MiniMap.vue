@@ -1,4 +1,8 @@
 <template>
+  <!-- 
+    1. 直接把SVG丟進來
+    2. 將元件標示class，可以開F12比對
+   -->
   <svg width="1125" height="1276" viewBox="0 0 1125 1276" fill="none" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <path
@@ -147,15 +151,9 @@
 <script>
 export default {
   data() {
-    return {
-      value: 0
-    }
+    return {}
   },
-  methods: {
-    handleClick() {
-      console.log(1);
-    },
-  },
+  methods: {},
 };
 </script>
 

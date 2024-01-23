@@ -8,6 +8,20 @@
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (並禁用 Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
 
+## 功能demo
+1. 自製地圖
+    [自製地圖demo](https://tibamef2e.com/chd104/ingrid/front/minimap)
+    [code](https://github.com/ingridkao/tibame_vite_template_front/blob/CHD104-day5/src/views/MiniMapView.vue)
+
+2. GSAP
+    下載GSAP
+    ```sh
+        npm install gsap
+    ```
+    [demo](https://tibamef2e.com/chd104/ingrid/front/gsap)
+    [code](https://github.com/ingridkao/tibame_vite_template_front/blob/CHD104-day5/src/views/GsapView.vue)
+
+
 
 ## Customize configuration / 自定義配置
 

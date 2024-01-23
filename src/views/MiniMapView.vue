@@ -5,15 +5,16 @@
     <ol>
       <li>在figma或是繪圖軟體把全部的元件選取變成“群組”</li>
       <li>匯出成SVG檔</li>
-      <li>在瀏覽器開啟SVG並檢查是否可以選取各個組件，這時可以回去軟體調整id或是整理圖層</li>
+      <li>在瀏覽器開啟SVG並檢查是否可以選取各個組件，這時可以回去軟體調整id或是整理圖層(像這個地圖高度過高)</li>
       <li>將完成的SVG丟到一個vue組件中</li>
       <li>將SVG裡面的元件用class標示，就可以用css去控制一些hover變色等</li>
     </ol>
 
     <div>
-      <Button type="error" @click="red = !red">{{red? '顯示': '隱藏'}}紅色Pin</Button> | 
-      <Button type="info" @click="blue = !blue">{{blue? '顯示': '隱藏'}}藍色Pin</Button> | 
+      <Button type="error" @click="red = !red">{{red? '隱藏': '顯示'}}紅色Pin</Button> | 
+      <Button type="info" @click="blue = !blue">{{blue? '隱藏': '顯示'}}藍色Pin</Button> | 
     </div>
+
     <div class="minimap_svg" :class="{redShow: red, blueShow: blue}">
       <MiniMap />
     </div>

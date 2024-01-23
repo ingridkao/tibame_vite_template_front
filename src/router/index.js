@@ -56,6 +56,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/gsap',
+      name: 'gsap',
+      component: () => import('../views/GsapView.vue'),
+      meta: {
+        title: 'GSAP',
+      }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('../views/NotFoundView.vue'),

@@ -21,6 +21,9 @@
                         <RouterLink to="/minimap">小地圖</RouterLink>
                     </MenuItem>
                     <MenuItem name="4">
+                        <RouterLink to="/gsap">GSAP</RouterLink>
+                    </MenuItem>
+                    <MenuItem name="5">
                         <RouterLink to="/login">login</RouterLink>
                     </MenuItem>
                 </Menu>
