@@ -13,6 +13,8 @@
     [自製地圖demo](https://tibamef2e.com/chd104/ingrid/front/minimap)
     [code](https://github.com/ingridkao/tibame_vite_template_front/blob/CHD104-day5/src/views/MiniMapView.vue)
 
+    SVG原檔在/public/map_source.svg
+
 2. GSAP
     下載GSAP
     ```sh
