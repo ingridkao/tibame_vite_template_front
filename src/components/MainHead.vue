@@ -18,6 +18,9 @@
                         <MenuItem name="2-3">哈哈</MenuItem>
                     </Submenu>
                     <MenuItem name="3">
+                        <RouterLink to="/minimap">小地圖</RouterLink>
+                    </MenuItem>
+                    <MenuItem name="4">
                         <RouterLink to="/login">login</RouterLink>
                     </MenuItem>
                 </Menu>

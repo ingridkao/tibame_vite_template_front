@@ -106,7 +106,7 @@ export default {
     },
     filterHandle() {
       this.displayData = this.responseData.filter((item)=>{
-        // 需要確認資料來源的key是什麼
+        // 如果報錯需要確認資料來源的key是什麼
         // console.log(item);
         return item.title.includes(this.search)
       })

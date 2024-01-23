@@ -48,6 +48,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/minimap',
+      name: 'minimap',
+      component: () => import('../views/MiniMapView.vue'),
+      meta: {
+        title: '做一個小地圖',
+      }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('../views/NotFoundView.vue'),

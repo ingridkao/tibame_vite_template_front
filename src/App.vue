@@ -27,8 +27,4 @@ export default {
 </script>
 
 <style scoped>
-main{
-  height: calc(100vh - 7rem);
-  height: calc(100dvh - 7rem);
-}
 </style>
