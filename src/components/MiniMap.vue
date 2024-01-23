@@ -2,6 +2,7 @@
   <!-- 
     1. 直接把SVG丟進來(原圖在/public/map_source.svg，可以比對)
     2. 將元件標示class，可以開F12比對
+    3. 可以搜尋redpin, bluepin, pin
    -->
   <svg width="1125" height="1276" viewBox="0 0 1125 1276" fill="none" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
