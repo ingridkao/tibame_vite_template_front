@@ -1,0 +1,35 @@
+[{
+  "id": 1,
+  "name": "商品名稱",
+  "price": 1000,
+  "img": "1.jpeg",
+  "rating": 5
+},
+{
+  "id": 2,
+  "name": "商品名稱2",
+  "price": 2000,
+  "img": "2.jpeg",
+  "rating": 2
+},
+{
+  "id": 3,
+  "name": "商品名稱3",
+  "price": 5000,
+  "img": "3.jpeg",
+  "rating": 5
+},{
+  "id": 4,
+  "name": "商品名稱4",
+  "price": 1000,
+  "img": "4.jpeg",
+  "rating": 4
+},
+{
+  "id": 5,
+  "name": "商品名稱5",
+  "price": 5000,
+  "img": "5.jpeg",
+  "rating": 2
+}
+]

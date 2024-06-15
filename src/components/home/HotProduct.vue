@@ -1,12 +1,15 @@
 <template>
   <section class="hotProduct">
     <h6>熱門商品</h6>
-
+    <input type="text" v-model="search">
+    <button @click="clear">X</button>
+    <button @click="filterData">OK</button>
+    {{ search }}
     <!-- ⬇️後續覺得這一段重複性太高也可以在拆出組件⬇️ -->
-    <div v-if="topFourProducts.length === 0">Loading...</div>
+    <div v-if="displayData.length === 0">Loading...</div>
     <div v-else class="hotProduct_container">
       <ProductCard 
-        v-for="item in topFourProducts" 
+        v-for="item in displayData" 
         :key="item.id"
         :item="item"
       />
@@ -27,6 +30,8 @@ export default {
   data() {
     return {
       productData: [],
+      displayData: [],
+      search: ""
     }
   },
   mounted() {
@@ -41,18 +46,30 @@ export default {
   },
   methods:{
     fetchProduct(){
-      fetch("/product.json")
+      fetch("/data/product.json")
       .then(res => res.json())
       .then(json => {
         // 確認有沒有response
         console.log(json);
         // 顯示用，如果response則顯示空陣列
         this.productData = json || []
+        this.displayData = json || []
       })
       .catch((error) => {
         // 錯誤例外
         console.log(`Error: ${error}`);
       })
+    },
+    filterData(){
+      console.log(this.search)
+      this.displayData = this.productData.filter((item)=>{
+        // return item.name == this.search
+        return item.name.includes(this.search)
+      })
+    },
+    clear(){
+      this.search = ""
+      this.displayData = this.productData
     }
   }
 }
