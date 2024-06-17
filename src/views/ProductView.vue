@@ -1,6 +1,8 @@
 <template>
   <main class="product">
     <header>
+      {{ cart }}
+      <br>
       <input type="text" v-model="search">
 
       <br>
@@ -38,10 +40,16 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
 import ProductCard from '@/components/layout/ProductCard.vue'
 export default {
   components: {
     ProductCard
+  },
+  computed: {
+      // 這裡帶入兩個參數 : 一個是Store，另一個是要帶入的state,getters
+      ...mapState(cartStore, ['cart','cartCount']),
   },
   data() {
     return {
@@ -53,6 +61,8 @@ export default {
   //可以用create也可以用mounted
   // created() {
   mounted() {
+    this.checkCart()
+
     fetch("/product.json")
     .then(res => res.json())
     .then(json => {
@@ -76,6 +86,7 @@ export default {
     } 
   },
   methods: {
+    ...mapActions(cartStore, ['checkCart']),
     clear(){
       this.displayData = this.responseData
     },

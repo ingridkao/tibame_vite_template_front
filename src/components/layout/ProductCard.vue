@@ -9,28 +9,31 @@
         >
         <img v-else src="" alt="">
       </div>
-      <div class="card_content">
-        <div class="card_content_title">
-          <p>{{ item.name || ''  }}</p>
-          <p>$ {{ item.price  }}</p>
-        </div>
-        <div v-if="item.rating">
-          <span 
-            v-for="star in item.rating" 
-            :key="star"
-          >
-            🌟
-          </span>
-        </div>
-      </div>
-      <div class="card_action">
-        <!-- <Button @click="addToCart(item, 1)">加入購物車</Button> -->
-      </div>
     </RouterLink>
+    <div class="card_content">
+      <div class="card_content_title">
+        <p>{{ item.name || ''  }}</p>
+        <p>$ {{ item.price  }}</p>
+      </div>
+      <div v-if="item.rating">
+        <span 
+          v-for="star in item.rating" 
+          :key="star"
+        >
+          🌟
+        </span>
+      </div>
+    </div>
+    <div class="card_action">
+      <button @click="addCart(item)">加入購物車</button>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
+
 import { RouterLink } from 'vue-router';
 export default {
   components: {
@@ -38,6 +41,7 @@ export default {
   },
   props: ['item'],
   methods: {
+    ...mapActions(cartStore, ['addCart', 'removeCart', 'cleanCart']),
     parseIcon(file) { 
       // 指到src || ..的意思是“回到上一層”
       return new URL(`../../assets/images/product/${file}`, import.meta.url).href 
