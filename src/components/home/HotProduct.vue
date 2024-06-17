@@ -46,7 +46,7 @@ export default {
   },
   methods:{
     fetchProduct(){
-      fetch("/data/product.json")
+      fetch(`${import.meta.env.BASE_URL}data/product.json`)
       .then(res => res.json())
       .then(json => {
         // 確認有沒有response

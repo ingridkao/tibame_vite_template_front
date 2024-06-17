@@ -1,8 +1,10 @@
 <template>
   <div>
     商品{{ $route.params.id }}<br>
-    {{ productInfo }}
-
+    <ProductCard 
+      v-if="productInfo"
+      :item="productInfo"
+    />
     <hr>
     推薦商品
     <RouterLink to="/product/1" >1</RouterLink>
@@ -12,7 +14,11 @@
   </div>
 </template>
 <script>
+import ProductCard from '@/components/layout/ProductCard.vue'
 export default {
+  components: {
+    ProductCard
+  },
   data() {
     return {
       productInfo: {
@@ -34,7 +40,7 @@ export default {
   methods: {
     fetchInfo(){
       // 抓API
-      fetch("/data/product.json")
+      fetch(`${import.meta.env.BASE_URL}data/product.json`)
       .then(res => res.json())
       .then(json => {
         this.productInfo = json.find(item => {

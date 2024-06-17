@@ -61,13 +61,12 @@ export default {
   //可以用create也可以用mounted
   // created() {
   mounted() {
+    // console.log(import.meta.env);
     this.checkCart()
-
-    fetch("/product.json")
+    fetch(`${import.meta.env.BASE_URL}data/product.json`)
     .then(res => res.json())
     .then(json => {
       // 確認有沒有response
-      console.log(json);
       // 備份還原用
       this.responseData = json
       // 顯示用
