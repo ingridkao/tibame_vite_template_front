@@ -1,15 +1,7 @@
 <template>
   <MainHead/>
-
-  <!-- 頁面路由route渲染的地方 -->
-  <main>
-    <RouterView />
-  </main>
-
-  <MainFooter 
-    :content1="money"
-    @callParentPay="payMoney"
-  />
+  <RouterView />
+  <MainFooter />
 </template>
 
 <script>
@@ -22,23 +14,6 @@ export default {
     MainHead,
     RouterView,
     MainFooter
-  },
-  data() {
-    return {
-      money: 100
-    }
-  },
-  methods: {
-    payMoney(amount){
-      this.money += amount
-    }
   }
 };
 </script>
-
-<style scoped>
-main{
-  height: calc(100vh - 7rem);
-  height: calc(100dvh - 7rem);
-}
-</style>

@@ -1,54 +1,66 @@
 <template>
-    <div class="product">
-        <div v-if="loading">loading...</div>
-        <div v-else-if="nodata">nodata...</div>
-        <div v-else class="product_container ">
-            <div class="product_card_img">
-                <img :src="responseData.image" :alt="responseData.title">
-            </div>
-            <div>
-                <h6>{{ responseData.title  }}</h6>
-                <p>{{ responseData.description  }}</p>
-                <p>$ {{ responseData.price }}</p>
-            </div>
-        </div>
-    </div>
+  <div>
+    商品{{ $route.params.id }}<br>
+    <ProductCard 
+      v-if="productInfo"
+      :item="productInfo"
+    />
+    <hr>
+    推薦商品
+    <RouterLink to="/product/1" >1</RouterLink>
+    <RouterLink to="/product/2" >2</RouterLink>
+    <RouterLink to="/product/3" >3</RouterLink>
+    <RouterLink to="/product/4" >4</RouterLink>
+  </div>
 </template>
-
 <script>
-import axios from 'axios';
+import ProductCard from '@/components/layout/ProductCard.vue'
 export default {
-    data() {
-        return {
-            responseData: {},
-            loading: true
-        }
-    },
-    mounted() {
-        this.axiosGetData()
-    },
-    computed: {
-        nodata() {
-            return Object.keys(this.responseData).length === 0
-        }
-    },
-    methods: {
-        axiosGetData() {
-            const pageId = this.$route.params.id
-            axios.get('https://fakestoreapi.com/products')
-            .then(res => {
-                if (res && res.data) {
-                    this.loading = false
-                    const target = res.data.find(item=>item.id == pageId)
-                    this.responseData = target? target: {}
-                }
-            })
-        }
+  components: {
+    ProductCard
+  },
+  data() {
+    return {
+      productInfo: {
+        name: '',
+        img: '',
+        comtent: ''
+      }
     }
+  },
+  watch: { 
+    '$route.params.id': { 
+      handler(newObj) { 
+        console.log(newObj);
+        this.fetchInfo()
+      }, 
+      deep: true 
+    } 
+  },
+  methods: {
+    fetchInfo(){
+      // 抓API
+      fetch(`${import.meta.env.BASE_URL}data/product.json`)
+      .then(res => res.json())
+      .then(json => {
+        this.productInfo = json.find(item => {
+          return item.id == this.$route.params.id
+        })
+      })
+      .catch((error) => {
+        // 錯誤例外
+        console.log(`Error: ${error}`);
+      })
+    }
+  },
+  mounted(){
+    this.fetchInfo()
+  },
 }
-
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/page/product.scss";
+<style>
+a{
+  color: #555;
+}
 </style>
