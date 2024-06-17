@@ -1,7 +1,9 @@
 <template>
   <main class="product">
     <header>
+      <input type="text" v-model="search">
 
+      <br>
       <!-- ⬇️後續覺得這一段重複性太高也可以在拆出組件⬇️ -->
       <button 
         v-for="starCount in 5" 
@@ -44,7 +46,8 @@ export default {
   data() {
     return {
       responseData: [],
-      displayData: []
+      displayData: [],
+      search: ''
     }
   },
   //可以用create也可以用mounted
@@ -60,6 +63,17 @@ export default {
       // 顯示用
       this.displayData = json
     })
+  },
+  watch: { 
+    'search': { 
+      handler(newObj) { 
+        console.log(newObj);
+        this.displayDat32wa = this.responseData.filter((item)=>{
+          return item.name.includes(this.search)
+        })
+      }, 
+      // deep: true 
+    } 
   },
   methods: {
     clear(){

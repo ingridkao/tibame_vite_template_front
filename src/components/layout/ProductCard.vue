@@ -1,35 +1,41 @@
 <template>
   <div v-if="item" class="card">
-    <div class="card_img">
-      <img 
-        v-if="item.img" 
-        :src="parseIcon(item.img)" 
-        :alt="item.name"
-      >
-      <img v-else src="" alt="">
-    </div>
-    <div class="card_content">
-      <div class="card_content_title">
-        <p>{{ item.name || ''  }}</p>
-        <p>$ {{ item.price  }}</p>
-      </div>
-      <div v-if="item.rating">
-        <span 
-          v-for="star in item.rating" 
-          :key="star"
+    <RouterLink :to="`/product/${item.id}`" class="card_link">
+      <div class="card_img">
+        <img 
+          v-if="item.img" 
+          :src="parseIcon(item.img)" 
+          :alt="item.name"
         >
-          🌟
-        </span>
+        <img v-else src="" alt="">
       </div>
-    </div>
-    <div class="card_action">
-      <!-- <Button @click="addToCart(item, 1)">加入購物車</Button> -->
-    </div>
+      <div class="card_content">
+        <div class="card_content_title">
+          <p>{{ item.name || ''  }}</p>
+          <p>$ {{ item.price  }}</p>
+        </div>
+        <div v-if="item.rating">
+          <span 
+            v-for="star in item.rating" 
+            :key="star"
+          >
+            🌟
+          </span>
+        </div>
+      </div>
+      <div class="card_action">
+        <!-- <Button @click="addToCart(item, 1)">加入購物車</Button> -->
+      </div>
+    </RouterLink>
   </div>
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
 export default {
+  components: {
+    RouterLink
+  },
   props: ['item'],
   methods: {
     parseIcon(file) { 
@@ -41,7 +47,14 @@ export default {
 </script>
 
 <style lang="scss">
+
 .card{
+  &_link{
+
+  }
+  // >a{
+  //   display: flex;
+  // }
   &_img{
     height: 12rem;
     >img{
